@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
-class SimpleScreen extends StatefulWidget {
-  SimpleScreen({Key? key}) : super(key: key);
-
-  @override
-  _SimpleScreenState createState() => _SimpleScreenState();
+class UnityTestingWrapper extends StatefulWidget {
+  UnityTestingState createState() => UnityTestingState();
 }
 
-class _SimpleScreenState extends State<SimpleScreen> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
-
+class UnityTestingState extends State<UnityTestingWrapper> {
   UnityWidgetController? _unityWidgetController;
   double _sliderValue = 0.0;
+
+  // get onUnityMessage => null;
+  void onUnityMessage(message) {
+    print('Received message from unity: ${message.toString()}');
+  }
 
   @override
   void initState() {
@@ -21,31 +20,24 @@ class _SimpleScreenState extends State<SimpleScreen> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _unityWidgetController!.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Simple Screen'),
-      ),
-      body: Card(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Unity Flutter Demo'),
+        ),
+        body: Card(
           margin: const EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: Stack(
-            children: [
+            children: <Widget>[
               UnityWidget(
-                onUnityCreated: _onUnityCreated,
-                onUnityMessage: onUnityMessage,
-                onUnitySceneLoaded: onUnitySceneLoaded,
+                onUnityCreated: onUnityCreated,
                 borderRadius: BorderRadius.all(Radius.zero),
+                // isARScene: true,
               ),
               Positioned(
                 bottom: 20,
@@ -75,8 +67,14 @@ class _SimpleScreenState extends State<SimpleScreen> {
                 ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
+  }
+
+  void onUnityCreated(controller) {
+    this._unityWidgetController = controller;
   }
 
   void setRotationSpeed(String speed) {
@@ -85,19 +83,5 @@ class _SimpleScreenState extends State<SimpleScreen> {
       'SetRotationSpeed',
       speed,
     );
-  }
-
-  void onUnityMessage(message) {
-    print('Received message from unity: ${message.toString()}');
-  }
-
-  void onUnitySceneLoaded(SceneLoaded? scene) {
-    print('Received scene loaded from unity: ${scene!.name}');
-    print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
-  }
-
-  // Callback that connects the created controller to the unity controller
-  void _onUnityCreated(controller) {
-    this._unityWidgetController = controller;
   }
 }

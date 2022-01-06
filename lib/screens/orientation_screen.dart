@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
 class OrientationScreen extends StatefulWidget {
-  OrientationScreen({Key key}) : super(key: key);
+  OrientationScreen({Key? key}) : super(key: key);
 
   @override
   _LoaderScreenState createState() => _LoaderScreenState();
 }
 
 class _LoaderScreenState extends State<OrientationScreen> {
-  UnityWidgetController _unityWidgetController;
+  UnityWidgetController? _unityWidgetController;
   double _sliderValue = 0.0;
 
   @override
@@ -35,6 +35,7 @@ class _LoaderScreenState extends State<OrientationScreen> {
             UnityWidget(
               onUnityCreated: onUnityCreated,
               onUnityMessage: onUnityMessage,
+              borderRadius: BorderRadius.all(Radius.zero),
             ),
             Positioned(
               bottom: 20,
@@ -86,7 +87,7 @@ class _LoaderScreenState extends State<OrientationScreen> {
   }
 
   void setRotationSpeed(String speed) {
-    _unityWidgetController.postMessage(
+    _unityWidgetController!.postMessage(
       'Cube',
       'SetRotationSpeed',
       speed,
