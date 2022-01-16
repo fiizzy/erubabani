@@ -40,7 +40,6 @@ android {
     }
 
     packagingOptions {
-        pickFirst '**/*.so'
         doNotStrip '*/armeabi-v7a/*.so'
         doNotStrip '*/arm64-v8a/*.so'
     }

@@ -47,45 +47,45 @@ class _SimpleScreenState extends State<SimpleScreen> {
                 onUnitySceneLoaded: onUnitySceneLoaded,
                 borderRadius: BorderRadius.all(Radius.zero),
               ),
-              Positioned(
-                bottom: 20,
-                left: 20,
-                right: 20,
-                child: Card(
-                  elevation: 10,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text("Rotation speed:"),
-                      ),
-                      Slider(
-                        onChanged: (value) {
-                          setState(() {
-                            _sliderValue = value;
-                          });
-                          setRotationSpeed(value.toString());
-                        },
-                        value: _sliderValue,
-                        min: 0,
-                        max: 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   bottom: 20,
+              //   left: 20,
+              //   right: 20,
+              //   child: Card(
+              //     elevation: 10,
+              //     child: Column(
+              //       children: <Widget>[
+              //         Padding(
+              //           padding: const EdgeInsets.only(top: 20),
+              //           child: Text("Rotation speed:"),
+              //         ),
+              //         Slider(
+              //           onChanged: (value) {
+              //             setState(() {
+              //               _sliderValue = value;
+              //             });
+              //             setRotationSpeed(value.toString());
+              //           },
+              //           value: _sliderValue,
+              //           min: 0,
+              //           max: 20,
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           )),
     );
   }
 
-  void setRotationSpeed(String speed) {
-    _unityWidgetController!.postMessage(
-      'Cube',
-      'SetRotationSpeed',
-      speed,
-    );
-  }
+  // void setRotationSpeed(String speed) {
+  //   _unityWidgetController!.postMessage(
+  //     'Cube',
+  //     'SetRotationSpeed',
+  //     speed,
+  //   );
+  // }
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');

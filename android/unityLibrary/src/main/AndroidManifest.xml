@@ -7,7 +7,7 @@
     <meta-data android:name="unity.splash-enable" android:value="True" />
     <meta-data android:name="unity.allow-resizable-window" android:value="False" />
     <meta-data android:name="notch.config" android:value="portrait|landscape" />
-    <meta-data android:name="unity.build-id" android:value="8e3a338f-cc99-43be-945e-a3d3db60da22" />
+    <meta-data android:name="unity.build-id" android:value="bd378a8f-aadb-4b42-b562-35d7c499bc05" />
     <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="true" />
     <meta-data android:name="com.google.ar.core" android:value="required" />
   </application>
